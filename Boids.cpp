@@ -799,11 +799,12 @@ for (j=0; j<nBoids; j++){
 
     for (j = 0; j<nBoids; j++){
         if (i != j){
+            //get distance between boids
             dist[0] = Boid_Location[j][0] - Boid_Location[i][0];
             dist[1] = Boid_Location[j][1] - Boid_Location[i][1];
             dist[2] = Boid_Location[j][2] - Boid_Location[i][2];
             
-
+            //check if satisfies constraints
             if (sqrt(pow(dist[0], 2) + pow(dist[1], 2) + pow(dist[2], 2)) <= r_rule3) {
               available_boids += 1;
               v3[0] += Boid_Velocity[j][0];
@@ -812,7 +813,7 @@ for (j=0; j<nBoids; j++){
             }
         }
     }
-
+    //get the new velocity
     if (available_boids != 0){
         avg_v[0] = v3[0]/available_boids;
         avg_v[1] = v3[1]/available_boids;
@@ -1014,7 +1015,7 @@ Boid_Location[i][2] += Boid_Velocity[i][2];
 
             }
         }
-
+        // if the new location is not further from some predatory boids, then do not update them 
         if (total_dist_new < total_dist_prev){
             Boid_Location[i][0] = prev_pos[i][0];
             Boid_Location[i][1] = prev_pos[i][1];
@@ -1111,6 +1112,7 @@ void drawBoid(int i)
  // you can use the Boid_Color[][] array instead if you
  // want to change boid colours yourself.
     if (i< size_random){
+        //display the predatory boids
         glColor4f(1,.35,.1,1); // This specifies colour as R,G,B,alpha.
                 // the alpha component specifies transparency.
                 // if alpha=1 the colour is completely opaque,
@@ -1143,7 +1145,7 @@ void drawBoid(int i)
 
     }
     else {
-
+        //display normal boids
         glPushMatrix();    // Save current transformation matrix
                 // Apply necessary transformations to this boid
         glTranslatef(Boid_Location[i][0],Boid_Location[i][1],Boid_Location[i][2]);
@@ -1209,8 +1211,10 @@ void drawBoid(int i)
         float z = (Boid_Location[i][2] - prev_pos[i][2]) / float(len);
         int alpha = 0.3;
         
+        //begin to draw the trails
         glBegin(GL_LINE_STRIP);
             for (int j=0; j<=len; j++){
+                //change the transparency parameter to make it look better
                 alpha -= 0.05;
                 glTranslatef(Boid_Location[i][0], Boid_Location[i][1], Boid_Location[i][2]);
                 glVertex3f(Boid_Location[i][0] - j*x, Boid_Location[i][1]- j*y, Boid_Location[i][2]);
