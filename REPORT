@@ -6,24 +6,30 @@ __________________________________________________________________
 1) Describe *briefly* and *concisely* what parts of the assignment
    you found easier, harder, and/or tricky to get right
 
-
+The implementation for the rules of moving is easier for me, because all of the algorithms are provided.
+Drawing the boids is hard for me - I have to look into online tutorials to figure out how to draw polygon and vertices.
 
 
 __________________________________________________________________
 2) Answer any //QUESTION: items noted in the code
 
 
+QUESTION: Is this the optimal way to implement this rule? can you see any problems or ways to improve this bit?
+Ans: It is not the optimal way as far as I think. The problem of this could be: for every boid, we need to loop over all boids to locate the center of mass, which is quite inefficient. We can random select two boids among any three to calculate the mass center.
 
-
+QUESTION: Why add inertia at the end and not at the beginning?
+Ans: The velocity of current boid would not change until we update after taking the rules, so the inertia cannot be added at the beginning. 
+	If the inertia is added at the end, then the location has been updated by the velocity, which is meaningless to add the inertia, since in the next loop with the change of velocity, the inertia need to be updated again.	
 
 
 
 __________________________________________________________________
 3) Describe any //CRUNCHY: extensions you implemented
 
+Add trails showing the last few positions of each boid.
 
-
-
+Add a few 'predatory boids'- plot predatory boids and normal boids with different color
+							- add functions to make the boids try to be stay far away from the predatory boids (compare the distance between some of the predatory boids and current location with the distance between some of the predatory boids and previous location)
 
 __________________________________________________________________
 
@@ -31,6 +37,8 @@ __________________________________________________________________
 
 a) What is the time complexity of the boid update (in big Oh notation),
    justify.
+
+   O(n^2)
 
 b) What could you do to make the update more efficient?
 
