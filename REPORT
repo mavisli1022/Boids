@@ -39,15 +39,19 @@ a) What is the time complexity of the boid update (in big Oh notation),
    justify.
 
    O(n^2)
+   Because in the update process, for each boid, we need to loop over all the boids to calculate the center of mass.
 
 b) What could you do to make the update more efficient?
-
+   We can use a 2-d array to store the distance between each two birds, which would reduce the time.
+   
 c) What is the greatest bottleneck of the program:
 
     Is it the boid update code?
     Or is it the boid display code?
 
     Why is that? justify your answer.
+    The boid display code.
+    Because the update code just simply followed the given algorithm, while for the display code, I have to figure out how to add different colors or shapes to make it look good.
 
 d) How would you adapt the idea behind Boids to swarms of running
    creatures (e.g. a herd of charging animals, an army of CGI
@@ -55,3 +59,6 @@ d) How would you adapt the idea behind Boids to swarms of running
    specific conditions you would need to add to the simulation
    that are different from your Boids implementation
 
+   -  different size of creatures to make it look more realistic
+   -  combination of different creatures
+   -  add environment simulations
